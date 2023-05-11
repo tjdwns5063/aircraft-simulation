@@ -7,7 +7,9 @@ public class Tower {
     private List<Flyable> observers;
 
     protected void conditionChanged() {
-
+        for (Flyable observer: observers) {
+            observer.update();
+        }
     }
 
     public void register(Flyable p_flyable) {
