@@ -1,6 +1,7 @@
 package aircraft_simulation.simulator;
 
 import java.io.*;
+import java.util.List;
 import aircraft_simulation.tower.*;
 import aircraft_simulation.flyable.*;
 
@@ -9,19 +10,15 @@ public class Simulator {
         if (args.length > 1) {
             System.out.println("too many args");
         }
+        
+        AircraftFactory aircraftFactory = AircraftFactory.create();
+        ScenarioParser scenarioParser = new ScenarioParser(args[0]);
+
+        long simulateTimes = scenarioParser.parseSimulateTime();
+        List<Flyable> flyables = scenarioParser.parseFlyable(aircraftFactory);
 
         Tower weatherTower = new WeatherTower();
-        AircraftFactory aircraftFactory = AircraftFactory.create();
 
-        Flyable helicopter = aircraftFactory.newAircraft("Helicopter", "H1", aircraftFactory.newCoordinates(10, 10, 10));
-        Flyable baloon = aircraftFactory.newAircraft("Baloon", "B1", aircraftFactory.newCoordinates(10, 10, 10));
-        Flyable jetPlane = aircraftFactory.newAircraft("JetPlane", "J1", aircraftFactory.newCoordinates(10, 10, 10));
-        Flyable baloon2 = aircraftFactory.newAircraft("Baloon", "B2", aircraftFactory.newCoordinates(10, 10, 10));
-
-        weatherTower.register(helicopter);
-        weatherTower.register(baloon);
-        weatherTower.register(jetPlane);
-        weatherTower.register(baloon2);
-        weatherTower.unregister(baloon);
+        flyables.stream().forEach( flyable -> weatherTower.register(flyable));     
     }
 }
