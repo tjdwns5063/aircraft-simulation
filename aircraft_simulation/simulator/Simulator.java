@@ -2,6 +2,7 @@ package aircraft_simulation.simulator;
 
 import java.io.*;
 import java.util.List;
+import java.util.stream.*;
 import aircraft_simulation.tower.*;
 import aircraft_simulation.flyable.*;
 
@@ -12,18 +13,13 @@ public class Simulator {
         }
 
         ScenarioParser scenarioParser = new ScenarioParser(args[0]);
-
-        long simulateTimes = scenarioParser.parseSimulateTime();
-        List<Flyable> flyables = scenarioParser.parseFlyable();
         WeatherTower weatherTower = new WeatherTower();
 
-        for (Flyable flyable: flyables) {
+        scenarioParser.parseFlyable().forEach(flyable -> { 
             flyable.registerTower(weatherTower);
-            weatherTower.register(flyable);
-        }
+            weatherTower.register(flyable); 
+        });
 
-        while (--simulateTimes >= 0) {
-            weatherTower.changeWeather();
-        }
+        LongStream.range(0, scenarioParser.parseSimulateTime()).forEach( i -> weatherTower.changeWeather() );
     }
 }
