@@ -9,4 +9,9 @@ public class Baloon extends Aircraft {
     public void updateConditions() {
 
     }
+
+    @Override
+    public String getFormattedName() {
+        return "Baloon#" + name + "(" + id + ")";
+    }
 }

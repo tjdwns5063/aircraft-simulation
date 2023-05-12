@@ -9,4 +9,9 @@ public class Helicopter extends Aircraft {
     public void updateConditions() {
 
     }
+
+    @Override
+    public String getFormattedName() {
+        return "Helicopter#" + name + "(" + id + ")";
+    }
 }

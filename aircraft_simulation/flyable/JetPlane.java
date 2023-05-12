@@ -9,4 +9,9 @@ public class JetPlane extends Aircraft {
     public void updateConditions() {
 
     }
+
+    @Override
+    public String getFormattedName() {
+        return "JetPlane#" + name + "(" + id + ")";
+    }
 }
