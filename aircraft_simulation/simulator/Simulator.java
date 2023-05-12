@@ -14,9 +14,13 @@ public class Simulator {
         ScenarioParser scenarioParser = new ScenarioParser(args[0]);
 
         long simulateTimes = scenarioParser.parseSimulateTime();
+        List<Flyable> flyables = scenarioParser.parseFlyable();
         WeatherTower weatherTower = new WeatherTower();
 
-        scenarioParser.parseFlyable().stream().forEach( flyable -> weatherTower.register(flyable));
+        for (Flyable flyable: flyables) {
+            flyable.registerTower(weatherTower);
+            weatherTower.register(flyable);
+        }
 
         while (--simulateTimes >= 0) {
             weatherTower.changeWeather();

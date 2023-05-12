@@ -10,6 +10,6 @@ public abstract class Flyable {
     public abstract String getFormattedName();
 
     public void registerTower(WeatherTower p_tower) {
-        p_tower.register(this);
+        weatherTower = p_tower;
     }
 }

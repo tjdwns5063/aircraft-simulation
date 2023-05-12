@@ -27,6 +27,9 @@ public class Helicopter extends Aircraft {
                 break ;
             default: throw new IllegalArgumentException("wrong weather");
         }
+
+        if (coordinates.isLanded())
+            weatherTower.unregister(this);
     }
 
     @Override

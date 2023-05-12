@@ -38,4 +38,8 @@ public class Coordinates {
         }
         height += point;
     }
+
+    public boolean isLanded() {
+        return height <= 0;
+    }
 }
