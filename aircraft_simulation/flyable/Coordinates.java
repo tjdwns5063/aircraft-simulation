@@ -32,6 +32,10 @@ public class Coordinates {
     }
 
     public void addHeight(int point) {
+        if (height + point > 100) {
+            height = 100;
+            return ;
+        }
         height += point;
     }
 }
