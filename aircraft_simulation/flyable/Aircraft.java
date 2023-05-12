@@ -1,6 +1,6 @@
 package aircraft_simulation.flyable;
 
-public class Aircraft {
+public class Aircraft extends Flyable {
     protected long id;
     protected String name;
     protected Coordinates coordinates;
@@ -9,5 +9,10 @@ public class Aircraft {
         id = p_id;
         name = p_name;
         coordinates = p_coordinates;
+    }
+
+    @Override
+    public void updateConditions() {
+
     }
 }

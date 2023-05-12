@@ -8,7 +8,7 @@ public class Tower {
 
     protected void conditionChanged() {
         for (Flyable observer: observers) {
-            observer.update();
+            observer.updateConditions();
         }
     }
 
