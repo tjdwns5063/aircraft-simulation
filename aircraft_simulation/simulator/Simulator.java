@@ -10,15 +10,16 @@ public class Simulator {
         if (args.length > 1) {
             System.out.println("too many args");
         }
-        
-        AircraftFactory aircraftFactory = AircraftFactory.create();
+
         ScenarioParser scenarioParser = new ScenarioParser(args[0]);
 
         long simulateTimes = scenarioParser.parseSimulateTime();
-        List<Flyable> flyables = scenarioParser.parseFlyable(aircraftFactory);
+        List<Flyable> flyables = scenarioParser.parseFlyable();
+        WeatherTower weatherTower = new WeatherTower();
 
-        Tower weatherTower = new WeatherTower();
-
-        flyables.stream().forEach( flyable -> weatherTower.register(flyable));     
+        flyables.stream().forEach( flyable -> weatherTower.register(flyable));
+        while (--simulateTimes > 0) {
+            weatherTower.changeWeather();
+        }
     }
 }

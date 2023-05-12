@@ -14,6 +14,8 @@ import aircraft_simulation.flyable.Coordinates;
 
 public class ScenarioParser {
     String scenarioPath;
+    AircraftFactory aircraftFactory = AircraftFactory.create();
+
 
     public ScenarioParser(String scenarioPath) throws IOException {
         this.scenarioPath = scenarioPath;
@@ -27,7 +29,7 @@ public class ScenarioParser {
         return list.get(0);
     }
 
-    public List<Flyable> parseFlyable(AircraftFactory aircraftFactory) throws IOException {
+    public List<Flyable> parseFlyable() throws IOException {
         Stream<String> stream = Files.lines(Paths.get(scenarioPath)).skip(1);
 
         return stream.map( str -> 
