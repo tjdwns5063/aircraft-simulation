@@ -1,11 +1,11 @@
 package aircraft_simulator.flyable;
 
-public class Helicopter extends Aircraft {
-    public Helicopter(long p_id, String p_name, Coordinates p_coordinates) {
+public class JetPlane extends Aircraft {
+    public JetPlane(long p_id, String p_name, Coordinates p_coordinates) {
         super(p_id, p_name, p_coordinates);
     }
 
     public void updateCondition() {
-
+        
     }
 }
