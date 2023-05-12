@@ -1,5 +1,6 @@
 package aircraft_simulation.simulator;
 
+import java.util.Random;
 import aircraft_simulation.flyable.Coordinates;
 
 public class WeatherProvider {
@@ -23,6 +24,12 @@ public class WeatherProvider {
     }
 
     public String getCurrentWeather(Coordinates p_coordinates) {
-        return "SNOW";
+        long seed = System.currentTimeMillis() + (
+            p_coordinates.getLongitude() * p_coordinates.getLatitude() * p_coordinates.getHeight()
+        );
+        Random rand = new Random(seed);
+        int weatherPoint = rand.nextInt(4);
+
+        return weather[weatherPoint];
     }
 }

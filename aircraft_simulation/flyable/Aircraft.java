@@ -7,6 +7,12 @@ public class Aircraft extends Flyable {
     protected String name;
     protected Coordinates coordinates;
     protected WeatherProvider weatherProvider;
+    protected enum Weather {
+        RAIN,
+        FOG,
+        SUN,
+        SNOW;
+    }
 
     protected Aircraft(long p_id, String p_name, Coordinates p_coordinates) {
         id = p_id;

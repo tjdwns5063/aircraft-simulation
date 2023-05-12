@@ -7,7 +7,24 @@ public class JetPlane extends Aircraft {
 
     @Override
     public void updateConditions() {
+        String weather = weatherProvider.getCurrentWeather(coordinates);
 
+        switch (Weather.valueOf(weather)) {
+            case RAIN: coordinates.addLatitude(5);
+                System.out.println(getFormattedName() + ": It’s raining. Better watch out for lightings.");
+                break ;
+            case FOG: coordinates.addLatitude(1);
+                System.out.println(getFormattedName() + ": OMG! Fog is making it really hard to see anything.");
+                break ;
+            case SUN: coordinates.addLatitude(10);
+                coordinates.addHeight(2);
+                System.out.println(getFormattedName() + ": It’s good weather to travel.");
+                break ;
+            case SNOW: coordinates.addHeight(-7);
+                System.out.println(getFormattedName() + ": OMG! Winter is coming!");
+                break ;
+            default: throw new IllegalArgumentException("wrong weather");
+        }
     }
 
     @Override

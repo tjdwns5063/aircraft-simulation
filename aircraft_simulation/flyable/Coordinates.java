@@ -22,4 +22,16 @@ public class Coordinates {
     public int getHeight() {
         return height;
     }
+
+    public void addLongitude(int point) {
+        longitude += point;
+    }
+
+    public void addLatitude(int point) {
+        latitude += point;
+    }
+
+    public void addHeight(int point) {
+        height += point;
+    }
 }
