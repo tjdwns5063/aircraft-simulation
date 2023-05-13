@@ -6,7 +6,6 @@ public class Aircraft extends Flyable {
     protected long id;
     protected String name;
     protected Coordinates coordinates;
-    protected WeatherProvider weatherProvider;
     protected enum Weather {
         RAIN,
         FOG,
@@ -18,7 +17,6 @@ public class Aircraft extends Flyable {
         id = p_id;
         name = p_name;
         coordinates = p_coordinates;
-        weatherProvider = WeatherProvider.create();
     }
 
     @Override

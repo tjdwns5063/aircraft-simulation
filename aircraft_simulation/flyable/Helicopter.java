@@ -9,7 +9,7 @@ public class Helicopter extends Aircraft {
 
     @Override
     public void updateConditions() {
-        String weather = weatherProvider.getCurrentWeather(coordinates);
+        String weather = weatherTower.getWeather(coordinates);
 
         switch (Weather.valueOf(weather)) {
             case RAIN: coordinates.addLongitude(5);
