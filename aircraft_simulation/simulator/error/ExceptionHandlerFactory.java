@@ -21,6 +21,7 @@ public class ExceptionHandlerFactory {
                 break;
             case "IllegalArgumentException": handler = new IllegalArgumentExceptionHandler();
                 break;
+            case "ArgumentSizeException": handler = new ArgumentSizeExceptionHandler();
         }
         return handler;
     }

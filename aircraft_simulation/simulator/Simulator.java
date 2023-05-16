@@ -10,6 +10,7 @@ import aircraft_simulation.simulator.error.*;
 public class Simulator {
     public static void main(String[] args) throws IOException {
         try {
+            if (args.length != 1) throw new ArgumentSizeException("Wrong argument count. Please, Input single argument.");
             simulate(args[0]);
         } catch (Exception exception) {
             ExceptionHandler handler = ExceptionHandlerFactory.of(exception);
