@@ -16,15 +16,20 @@ public class Simulator {
         try {
             simulate(args[0]);
         } catch (FileNotFoundException err) {
-            System.out.println("Cannot find file. Please, Check file name.");
+            FileNotFoundExceptionHandler handler = new FileNotFoundExceptionHandler();
+            handler.handle(err);
         } catch (FileWriteException err) {
-            System.out.println(err.getMessage());
+            FileWriteExceptionHandler handler = new FileWriteExceptionHandler();
+            handler.handle(err);
         } catch (IOException err) {
-            System.out.println("Fail reading file. Please, restart Program.");
+            IOExceptionHandler handler = new IOExceptionHandler();
+            handler.handle(err);        
         } catch (WrongFormatException err) {
-            System.out.println(err.getMessage());
+            WrongFormatExceptionHandler handler = new WrongFormatExceptionHandler();
+            handler.handle(err);   
         } catch (IllegalArgumentException err) {
-            System.out.println(err.getMessage());
+            IllegalArgumentExceptionHandler handler = new IllegalArgumentExceptionHandler();
+            handler.handle(err);   
         }
     }
 
