@@ -1,6 +1,5 @@
 package aircraft_simulation.flyable;
 
-import java.io.IOException;
 import java.lang.StringBuilder;
 
 public class JetPlane extends Aircraft {
@@ -27,7 +26,6 @@ public class JetPlane extends Aircraft {
             case SNOW: coordinates.addHeight(-7);
                 message.append(getFormattedName() + ": OMG! Winter is coming!\n");
                 break ;
-            default: throw new IllegalArgumentException("wrong weather");
         }
 
         if (coordinates.isLanded())

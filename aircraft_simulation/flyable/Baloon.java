@@ -26,7 +26,6 @@ public class Baloon extends Aircraft {
             case SNOW: coordinates.addHeight(-15);
                 message.append(getFormattedName() + ": It’s snowing. We’re gonna crash.\n");
                 break ;
-            default: throw new IllegalArgumentException("wrong weather");    
         }
 
         if (coordinates.isLanded())

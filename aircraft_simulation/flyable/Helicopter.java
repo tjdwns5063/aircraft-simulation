@@ -1,8 +1,6 @@
 package aircraft_simulation.flyable;
 
-import java.lang.IllegalArgumentException;
 import java.lang.StringBuilder;
-import java.io.IOException;
 
 public class Helicopter extends Aircraft {
     public Helicopter(long p_id, String p_name, Coordinates p_coordinates) {
@@ -28,7 +26,6 @@ public class Helicopter extends Aircraft {
             case SNOW: coordinates.addHeight(-12);
                 message.append(getFormattedName() + ": My rotor is going to freeze!\n");
                 break ;
-            default: throw new IllegalArgumentException("wrong weather");
         }
 
         if (coordinates.isLanded())

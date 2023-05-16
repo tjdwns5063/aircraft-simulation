@@ -15,14 +15,20 @@ public class Simulator {
 
         try {
             simulate(args[0]);
+        } catch (FileNotFoundException err) {
+            System.out.println("Cannot find file. Please, Check file name.");
+        } catch (FileWriteException err) {
+            System.out.println(err.getMessage());
         } catch (IOException err) {
-            System.out.println("Cannot open file. Please, Check file name.");
+            System.out.println("Fail reading file. Please, restart Program.");
         } catch (WrongFormatException err) {
+            System.out.println(err.getMessage());
+        } catch (IllegalArgumentException err) {
             System.out.println(err.getMessage());
         }
     }
 
-    private static void simulate(String path) throws IOException {
+    private static void simulate(String path) throws IOException, FileNotFoundException {
         ScenarioParser scenarioParser = new ScenarioParser(path);
         WeatherTower weatherTower = new WeatherTower();
         FileWriter fileWriter = FileWriter.from();
