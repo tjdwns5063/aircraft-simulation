@@ -1,6 +1,8 @@
 package aircraft_simulation.flyable;
 
+import java.io.IOException;
 import aircraft_simulation.simulator.WeatherProvider;
+import aircraft_simulation.simulator.FileWriter;
 
 public class Aircraft extends Flyable {
     protected long id;
@@ -20,7 +22,7 @@ public class Aircraft extends Flyable {
     }
 
     @Override
-    public void updateConditions() {}
+    public String updateConditions() { return ""; }
 
     @Override
     public String getFormattedName() { return ""; }

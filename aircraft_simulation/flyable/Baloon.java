@@ -1,33 +1,38 @@
 package aircraft_simulation.flyable;
 
+import java.lang.StringBuilder;
+
 public class Baloon extends Aircraft {
     public Baloon(long p_id, String p_name, Coordinates p_coordinates) {
         super(p_id, p_name, p_coordinates);
     }
 
     @Override
-    public void updateConditions() {
+    public String updateConditions() {
         String weather = weatherTower.getWeather(coordinates);
+        StringBuilder message = new StringBuilder();
 
         switch (Weather.valueOf(weather)) {
             case RAIN: coordinates.addHeight(-5);
-                System.out.println(getFormattedName() + ": Damn you rain! You messed up my baloon.");
+                message.append(getFormattedName() + ": Damn you rain! You messed up my baloon.\n");
                 break ;
             case FOG: coordinates.addHeight(-3);
-                System.out.println(getFormattedName() + ": I can’t see my baloon.");
+                message.append(getFormattedName() + ": I can’t see my baloon.\n");
                 break ;
             case SUN: coordinates.addLongitude(2);
                 coordinates.addHeight(4);
-                System.out.println(getFormattedName() + ": Let’s enjoy the good weather and take some pics.");
+                message.append(getFormattedName() + ": Let’s enjoy the good weather and take some pics.\n");
                 break ;
             case SNOW: coordinates.addHeight(-15);
-                System.out.println(getFormattedName() + ": It’s snowing. We’re gonna crash.");
+                message.append(getFormattedName() + ": It’s snowing. We’re gonna crash.\n");
                 break ;
             default: throw new IllegalArgumentException("wrong weather");    
         }
 
         if (coordinates.isLanded())
-            weatherTower.unregister(this);
+            message.append(weatherTower.unregister(this));
+
+        return message.toString();
     }
 
     @Override

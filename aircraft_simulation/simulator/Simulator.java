@@ -25,13 +25,16 @@ public class Simulator {
     private static void simulate(String path) throws IOException {
         ScenarioParser scenarioParser = new ScenarioParser(path);
         WeatherTower weatherTower = new WeatherTower();
+        FileWriter fileWriter = FileWriter.from();
         long simulateTime = scenarioParser.parseSimulateTime();
 
         scenarioParser.parseFlyable().forEach(flyable -> { 
             flyable.registerTower(weatherTower);
-            weatherTower.register(flyable); 
+            fileWriter.writeToFile(weatherTower.register(flyable)); 
         });
 
-        LongStream.range(0, simulateTime).forEach( i -> weatherTower.changeWeather() );
+        LongStream.range(0, simulateTime).forEach( i -> 
+            fileWriter.writeToFile(weatherTower.changeWeather()) 
+        );
     }
 }

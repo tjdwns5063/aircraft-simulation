@@ -5,7 +5,7 @@ import aircraft_simulation.tower.WeatherTower;
 public abstract class Flyable {
     protected WeatherTower weatherTower;
 
-    public abstract void updateConditions();
+    public abstract String updateConditions();
 
     public abstract String getFormattedName();
 
