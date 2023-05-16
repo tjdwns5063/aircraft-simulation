@@ -9,27 +9,12 @@ import aircraft_simulation.simulator.error.*;
 
 public class Simulator {
     public static void main(String[] args) throws IOException {
-        if (args.length > 1) {
-            System.out.println("too many args");
-        }
-
         try {
             simulate(args[0]);
-        } catch (FileNotFoundException err) {
-            FileNotFoundExceptionHandler handler = new FileNotFoundExceptionHandler();
-            handler.handle(err);
-        } catch (FileWriteException err) {
-            FileWriteExceptionHandler handler = new FileWriteExceptionHandler();
-            handler.handle(err);
-        } catch (IOException err) {
-            IOExceptionHandler handler = new IOExceptionHandler();
-            handler.handle(err);        
-        } catch (WrongFormatException err) {
-            WrongFormatExceptionHandler handler = new WrongFormatExceptionHandler();
-            handler.handle(err);   
-        } catch (IllegalArgumentException err) {
-            IllegalArgumentExceptionHandler handler = new IllegalArgumentExceptionHandler();
-            handler.handle(err);   
+        } catch (Exception exception) {
+            ExceptionHandler handler = ExceptionHandlerFactory.of(exception);
+
+            handler.handle(exception);
         }
     }
 
