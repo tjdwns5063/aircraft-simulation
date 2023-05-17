@@ -19,7 +19,7 @@ public class Simulator {
         }
     }
 
-    private static void simulate(String path) throws IOException, FileNotFoundException {
+    private static void simulate(String path) throws IOException {
         ScenarioParser scenarioParser = new ScenarioParser(path);
         WeatherTower weatherTower = new WeatherTower();
         FileWriter fileWriter = FileWriter.from();
