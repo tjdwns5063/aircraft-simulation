@@ -4,7 +4,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import aircraft_simulation.simulator.error.*;
@@ -20,35 +19,21 @@ public class ScenarioParser {
         return Files.lines(Paths.get(scenarioPath));
     }
 
-    private boolean isInteger(String s) {
-        return s.chars().allMatch( c -> Character.isDigit(c) );
-    }
-
-    private boolean checkAircraftFormat() throws IOException {
-        Stream<String> stream = createStream().skip(1);
-
-        return stream.map( str -> str.split(" ") )
-            .allMatch( strArr -> strArr.length == 5 && isInteger(strArr[2]) && isInteger(strArr[3]) && isInteger(strArr[4]));
-    }
-
-    public ScenarioParser(String scenarioPath) throws IOException {
+    public ScenarioParser(String scenarioPath) {
         this.scenarioPath = scenarioPath;
     }
 
     public long parseSimulateTime() throws IOException {
-        Stream<String> stream = createStream().limit(1);
-        List<Long> list = stream.filter( str -> isInteger(str) ).map( str -> Long.parseLong(str)).collect(Collectors.toList());
+        List<Long> list = createStream().limit(1).filter( str -> Validator.isInteger(str) ).map( str -> Long.parseLong(str)).collect(Collectors.toList());
 
         if (list.isEmpty()) throw new WrongFormatException();
         return list.get(0);
     }
 
     public List<Flyable> parseFlyable() throws IOException {
-        Stream<String> stream = createStream().skip(1);
+        if (!Validator.checkAircraftFormat(createStream().skip(1))) throw new WrongFormatException();
 
-        if (!checkAircraftFormat()) throw new WrongFormatException();
-
-        return stream.map( str -> 
+        return createStream().skip(1).map( str -> 
             str.split(" ")
         ).filter( strArr -> strArr.length == 5).map( strArr ->
             aircraftFactory.newAircraft(
